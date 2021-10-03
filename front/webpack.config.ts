@@ -79,6 +79,12 @@ const config: Configuration = {
     port: 3090,
     devMiddleware: { publicPath: '/dist/' },
     static: { directory: path.resolve(__dirname) },
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:3095',
+        changeOrigin: true,
+      },
+    },
   },
 };
 
@@ -94,7 +100,7 @@ if (isDevelopment && config.plugins) {
   // config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: false }));
 }
 if (!isDevelopment && config.plugins) {
-  config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
+  // config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
   // config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'static' }));
 }
 
